@@ -63,10 +63,16 @@ source .venv/bin/activate  # or `.venv\Scripts\activate` on Windows
 pip install -r requirements.txt
 ```
 
+
 ### 4. Run the API
+open config.py and modify the location of the data, and set all neccery config files
+
+Configuration files are stored in `core/config.py`
+
+### 5. Run the API
 
 ```bash
-cd api/crud/
+cd endpoints/api/crud/
 python flood.py
 ```
 
@@ -76,7 +82,7 @@ The API will start running on:
 http://127.0.0.1:8082
 ```
 
-### 5. Access the API Docs
+### 6. Access the API Docs
 
 Open this in your browser:
 
