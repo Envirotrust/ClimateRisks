@@ -1,4 +1,4 @@
-# Climate Riks ETL Pipeline And API Endpoints
+# Climate Risks ETL Pipeline And API Endpoints
 The **Climate Risks Pipeline API** is a lightweight ETL and API system for climate data processing, conversion, and access—designed with flexibility and performance in mind. It includes features for querying and visualizing flood-related datasets.
 
 ## Features
@@ -46,7 +46,7 @@ CLimateRisks
 ### 1. Clone the repository
 
 ```bash
-git clone <repo-url>
+git clone https://github.com/Envirotrust/ClimateRisks.git
 cd climaterisks
 ```
 
