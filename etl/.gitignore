@@ -1,0 +1,6 @@
+/data
+/playground
+*.venv
+*.html
+*.pyc
+ __pycache__
