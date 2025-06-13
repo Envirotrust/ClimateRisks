@@ -73,7 +73,7 @@ python flood.py
 The API will start running on:
 
 ```
-http://127.0.0.1:8083
+http://127.0.0.1:8082
 ```
 
 ### 5. Access the API Docs
@@ -81,7 +81,7 @@ http://127.0.0.1:8083
 Open this in your browser:
 
 ```
-http://127.0.0.1:8083/docs
+http://127.0.0.1:8082/docs
 ```
 You can explore the available endpoints using Swagger UI.
 
