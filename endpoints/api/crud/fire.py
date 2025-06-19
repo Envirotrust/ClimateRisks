@@ -41,7 +41,6 @@ import xarray as xr
 import zarr
 import dask
 import s3fs
-from typing import Union, Optional
 from utils.utils import (validate_coordinates, validate_bucket_and_key, 
                         validate_credentials, validate_european_coordinates)
 
@@ -53,12 +52,13 @@ load_dotenv()
 # Load AWS credentials from environment variables
 ACCESS_KEY = os.getenv("AWS_ACCESS_KEY")
 SECRET_KEY = os.getenv("AWS_SECRET_KEY")
+BUKCET = os.getenv("s3_BUCKET")
+KEY = os.getenv("s3_FIRE_RISK_KEY")
 
-
-def get_fire_risk_information(bucket: str,
-                              key: str,
-                              longitude: float,
-                              latitude: float) -> dict:
+def get_fire_risk_information(bucket:str=BUKCET,
+                              key:str=KEY,
+                              longitude:float,
+                              latitude:float) -> dict:
     """Retrieve fire risk information for a specific geographic point from a Zarr dataset on S3."""
 
     # Validate inputs
@@ -86,8 +86,19 @@ def get_fire_risk_information(bucket: str,
         point_dict["longitude"] = round(float(point_data.coords["x"].values), 6)
         point_dict["latitude"] = round(float(point_data.coords["y"].values), 6)
 
-        return point_dict
 
+        results = {
+            "High_risk": point_dict.get('High risk (aggr. wildfire risk)'),
+            "Intermediate_risk": point_dict.get( 'Intermediate risk (aggr. wildfire risk)'),
+            "Low_risk": point_dict.get('Low risk (aggr. wildfire risk)'),
+            "Potential_burnable_land_proportion": point_dict.get('Potential burnable land proportion'),
+            "Wildland_Urban_Interface": point_dict.get('Wildland-Urban Interface (WUI)'),
+            "longitude": point_dict["longitude"],
+            "latitude": point_dict["latitude"]
+        }
+
+        return results
+    
     except KeyError as e:
         raise KeyError(f"KeyError: {str(e)} — Check if the Zarr file contains the required variables.")
 
