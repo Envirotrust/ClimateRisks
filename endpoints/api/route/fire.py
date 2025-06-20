@@ -14,7 +14,7 @@ fire_route = APIRouter()
          status_code=200,
          tags=["Fire Risk"],
          description="Check the fire risk for a particular location")
-async def get_flood_info(longitude: float, latitude: float) -> FireRiskDataResponse:
+async def get_fire_risk_info(longitude: float, latitude: float) -> FireRiskDataResponse:
     """Check the fire risk for the given latitude and longitude and return info as Dict"""
     try:
         data = get_fire_risk_information(longitude, latitude)
