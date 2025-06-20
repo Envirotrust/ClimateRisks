@@ -55,10 +55,12 @@ SECRET_KEY = os.getenv("AWS_SECRET_KEY")
 BUKCET = os.getenv("s3_BUCKET")
 KEY = os.getenv("s3_FIRE_RISK_KEY")
 
-def get_fire_risk_information(bucket:str=BUKCET,
-                              key:str=KEY,
-                              longitude:float,
-                              latitude:float) -> dict:
+def get_fire_risk_information(
+                            longitude:float,
+                            latitude:float,
+                            bucket:str=BUKCET,
+                            key:str=KEY,
+                              ) -> dict:
     """Retrieve fire risk information for a specific geographic point from a Zarr dataset on S3."""
 
     # Validate inputs
@@ -109,11 +111,11 @@ def get_fire_risk_information(bucket:str=BUKCET,
         raise RuntimeError(f"Unexpected error while accessing Zarr data: {str(e)}")
 
 
-# if __name__ == "__main__":
-#     bucket = 'envirotrust-staging'
-#     key = 'fire_risks/fire_risks_variables'
-#     longitude = 12.772144
-#     latitude = 45.562546
+if __name__ == "__main__":
+    bucket = 'envirotrust-staging'
+    key = 'fire_risks/fire_risks_variables'
+    longitude = 12.772144
+    latitude = 45.562546
 
-#     fire_risk_info = get_fire_risk_information(bucket, key, longitude, latitude)
-#     print(fire_risk_info)
+    fire_risk_info = get_fire_risk_information(longitude, latitude,bucket, key)
+    print(fire_risk_info)
