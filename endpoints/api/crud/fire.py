@@ -102,7 +102,7 @@ def get_fire_risk_information(
             "latitude": point_dict["latitude"]
         }
 
-        return results
+        return {"fire_risk_data": results}
     
     except KeyError as e:
         raise KeyError(f"KeyError: {str(e)} — Check if the Zarr file contains the required variables.")
@@ -112,13 +112,3 @@ def get_fire_risk_information(
 
     except Exception as e:
         raise RuntimeError(f"Unexpected error while accessing Zarr data: {str(e)}")
-
-
-# if __name__ == "__main__":
-#     bucket = 'envirotrust-staging'
-#     key = 'fire_risks/fire_risks_variables'
-#     longitude = 12.772144
-#     latitude = 45.562546
-
-#     fire_risk_info = get_fire_risk_information(longitude, latitude,bucket, key)
-#     print(fire_risk_info)
