@@ -40,7 +40,7 @@ import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
 
 from .utils.duckdb import setup_spatial_extensions
-from .utils.utils import validate_coordinates
+from .utils.utils import validate_coordinates,validate_european_coordinates
 import duckdb
 import json
 from shapely.geometry import Point
@@ -58,6 +58,7 @@ def get_flood_information(
     
     # validate the input coordinates
     validate_coordinates(point_lon, point_lat)
+    point_lon, point_lat = validate_european_coordinates(point_lon, point_lat)
 
     # Setup spatial extensions
     setup_spatial_extensions()
@@ -106,19 +107,4 @@ def get_flood_information(
     except Exception as e:
         raise RuntimeError(f"{e.__class__.__name__}: {str(e)}")
 
-
-# if __name__ == "__main__":
-#     start_time = time.time()
-
-#     point_lon=12.772144
-#     point_lat=45.562546
-
-    
-#     result = get_flood_information(
-#             point_lon=point_lon,
-#             point_lat=point_lat,
-#             parquet_path=FLOOD_DATA)
-    
-#     elapsed = time.time() - start_time
-#     print(f"Total time taken: {elapsed:.2f}s - Result: {result}")
     
