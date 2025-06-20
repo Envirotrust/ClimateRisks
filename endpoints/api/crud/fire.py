@@ -35,13 +35,16 @@ Note:
 - The function returns a dictionary with the longitude, latitude, and all fire risk variables at that point.
 """
 
-import os
 import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
+
+
 import xarray as xr
 import zarr
 import dask
 import s3fs
-from utils.utils import (validate_coordinates, validate_bucket_and_key, 
+from .utils.utils import (validate_coordinates, validate_bucket_and_key, 
                         validate_credentials, validate_european_coordinates)
 
 from dotenv import load_dotenv
@@ -111,11 +114,11 @@ def get_fire_risk_information(
         raise RuntimeError(f"Unexpected error while accessing Zarr data: {str(e)}")
 
 
-if __name__ == "__main__":
-    bucket = 'envirotrust-staging'
-    key = 'fire_risks/fire_risks_variables'
-    longitude = 12.772144
-    latitude = 45.562546
+# if __name__ == "__main__":
+#     bucket = 'envirotrust-staging'
+#     key = 'fire_risks/fire_risks_variables'
+#     longitude = 12.772144
+#     latitude = 45.562546
 
-    fire_risk_info = get_fire_risk_information(longitude, latitude,bucket, key)
-    print(fire_risk_info)
+#     fire_risk_info = get_fire_risk_information(longitude, latitude,bucket, key)
+#     print(fire_risk_info)
