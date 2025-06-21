@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException,Query
 from api.crud.flood import get_flood_information
 from schema.flood import FloodDataResponse
 
@@ -14,7 +14,9 @@ flood_route = APIRouter()
          status_code=200,
          tags=["Flood Risk"],
          description="Check if a particular location is flooded or not")
-async def get_flood_info(longitude: float, latitude: float) -> FloodDataResponse:
+async def get_flood_info(longitude: float = Query(..., gt=-180, lt=180, description="Longitude must be between -180 and 180."),
+                        latitude: float = Query(..., gt=-90, lt=90, description="Longitude must be between -180 and 180.")
+                        ) -> FloodDataResponse:
     """Check if the latitudes and longitudes intersect with flood areas and return info as JSON"""
     try:
         data = get_flood_information(longitude, latitude)
