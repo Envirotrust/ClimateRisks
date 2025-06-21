@@ -63,6 +63,9 @@ source .venv/bin/activate  # or `.venv\Scripts\activate` on Windows
 pip install -r requirements.txt
 ```
 
+### 4. Rename env.exaple
+
+Rename `env.example` filr to `.env` and fill all the required variables
 
 ### 4. Run the API
 open config.py and modify the location of the data, and set all neccery config files
